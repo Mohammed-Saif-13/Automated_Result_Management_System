@@ -8,6 +8,8 @@ import AuthLayout from '@/components/layout/AuthLayout';
 import DashboardLayout from '@/components/layout/DashboardLayout';
 
 import Login from '@/pages/auth/Login';
+import Register from '@/pages/auth/Register';
+import ForgotPassword from '@/pages/auth/ForgotPassword';
 
 import AdminDashboard from '@/pages/admin/Dashboard';
 import UploadResults from '@/pages/admin/UploadResults';
@@ -23,7 +25,6 @@ import Performance from '@/pages/student/Performance';
 import ParentDashboard from '@/pages/parent/Dashboard';
 import ChildResults from '@/pages/parent/ChildResults';
 import Progress from '@/pages/parent/Progress';
-import ForgotPassword from '@/pages/auth/ForgotPassword';
 
 const AppRouter = () => {
     const { isAuthenticated, getRole } = useAuth();
@@ -61,6 +62,17 @@ const AppRouter = () => {
                         </AuthLayout>
                     )
                 } />
+
+                <Route path="/register" element={
+                    isAuthenticated ? (
+                        <Navigate to={getDefaultRoute()} replace />
+                    ) : (
+                        <AuthLayout>
+                            <Register />
+                        </AuthLayout>
+                    )
+                } />
+
 
                 <Route path={ROUTES.ADMIN.DASHBOARD} element={
                     <ProtectedRoute allowedRoles={[ROLES.ADMIN]}>

@@ -8,7 +8,7 @@ import Button from '@/components/ui/Button';
 import Input from '@/components/ui/Input';
 import Card from '@/components/ui/Card';
 import { useToast } from '@/hooks/useToast';
-import { firebaseAuthService } from '@/services/firebaseAuthService';
+import { authService } from '@/services/authService';
 import { ROUTES } from '@/constants/routes';
 
 const forgotPasswordSchema = z.object({
@@ -35,7 +35,7 @@ const ForgotPassword = () => {
         setLoading(true);
 
         try {
-            const result = await firebaseAuthService.resetPassword(data.email);
+            const result = await authService.resetPassword(data.email);
 
             if (result.success) {
                 setEmailSent(true);
